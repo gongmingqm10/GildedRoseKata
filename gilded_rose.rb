@@ -18,58 +18,58 @@ class GildedRose
 
   def update_quality
 
-    (0..(@items.size-1)).each { |index|
-      case @items[index].name
+    @items.each { |item|
+      case item.name
         when "Aged Brie"
-          increase_quality(index)
-
-          if expired? index
-            increase_quality(index)
+          increase_quality(item)
+          if expired? item
+            increase_quality(item)
           end
 
         when "Backstage passes to a TAFKAL80ETC concert"
-          increase_quality(index)
-          if (@items[index].sell_in < 11)
-            increase_quality(index)
+          increase_quality(item)
+          if (item.sell_in < 11)
+            increase_quality(item)
           end
-          if (@items[index].sell_in < 6)
-            increase_quality(index)
+          if (item.sell_in < 6)
+            increase_quality(item)
           end
 
-          if expired? index
-            items[index].quality = 0
+          if expired? item
+            item.quality = 0
           end
 
         when "Sulfuras, Hand of Ragnaros"
 
         else
-          decrease_quality(index)
+          decrease_quality(item)
 
-          if expired? index
-            decrease_quality(index)
+          if expired? item
+            decrease_quality(item)
           end
       end
     }
+    
   end
 
 
   private
 
-  def increase_quality(i)
-    if (@items[i].quality < 50)
-      @items[i].quality = @items[i].quality + 1
+  def increase_quality(item)
+    if (item.quality < 50)
+      item.quality = item.quality + 1
     end
   end
 
-  def decrease_quality(i)
-    if (@items[i].quality > 0)
-      @items[i].quality = @items[i].quality - 1
+  def decrease_quality(item)
+    if (item.quality > 0)
+      item.quality = item.quality - 1
     end
   end
 
-  def expired?(i)
-    @items[i].sell_in = @items[i].sell_in - 1;
-    @items[i].sell_in < 0
+  def expired?(item)
+    item.sell_in = item.sell_in - 1;
+    item.sell_in < 0
   end
 
 
