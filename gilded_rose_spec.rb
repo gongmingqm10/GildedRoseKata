@@ -6,7 +6,7 @@ describe GildedRose do
   it "should do something" do
     subject.update_quality
   end
-  
+
   describe "Aged Brie item" do
     it "should increase with time go on" do
       1.times { subject.update_quality }
@@ -45,6 +45,19 @@ describe GildedRose do
     it "should be zero when expired" do
       16.times {subject.update_quality}
       expect(subject.items[4].quality).to eq(0)
+    end
+  end
+
+
+  describe "Dexterity Vest" do
+    it "should decrease at a normal speed before expired" do
+      6.times {subject.update_quality}
+      expect(subject.items[0].quality).to eq(14)
+    end
+
+    it "should decrease at twice the speed when expired" do
+      12.times {subject.update_quality}
+      expect(subject.items[0].quality).to eq(6)
     end
   end
 
