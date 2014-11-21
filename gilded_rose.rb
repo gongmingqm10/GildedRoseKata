@@ -20,18 +20,20 @@ class GildedRose
 
     for i in 0..(@items.size-1)
 
-      if (@items[i].name != "Aged Brie" && @items[i].name != "Backstage passes to a TAFKAL80ETC concert" && @items[i].name != "Sulfuras, Hand of Ragnaros")
-        decrease_quality(i)
-      else
-        increase_quality(i)
-        if (@items[i].name == "Backstage passes to a TAFKAL80ETC concert")
+      case @items[i].name
+        when "Aged Brie"
+          increase_quality(i)
+        when "Backstage passes to a TAFKAL80ETC concert"
+          increase_quality(i)
           if (@items[i].sell_in < 11)
             increase_quality(i)
           end
           if (@items[i].sell_in < 6)
             increase_quality(i)
           end
-        end
+        when "Sulfuras, Hand of Ragnaros"
+        else
+          decrease_quality(i)
       end
 
       if (@items[i].name != "Sulfuras, Hand of Ragnaros")
